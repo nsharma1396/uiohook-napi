@@ -1,12 +1,12 @@
 {
-  "name": "uiohook-napi",
+  "name": "@nsharma1396/uiohook-napi",
   "version": "1.5.3",
   "author": {
     "name": "Alexander Drozdov"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SnosMe/uiohook-napi.git"
+    "url": "https://github.com/nsharma1396/uiohook-napi.git"
   },
   "license": "MIT",
   "keywords": [

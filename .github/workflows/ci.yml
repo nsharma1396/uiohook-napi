@@ -85,5 +85,5 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: package
-        path: uiohook-napi-*.tgz
+        path: @nsharma1396/uiohook-napi-*.tgz
         retention-days: 3
