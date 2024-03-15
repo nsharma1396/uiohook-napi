@@ -1,8 +1,8 @@
 {
-  "name": "@nsharma1396/uiohook-napi",
-  "version": "1.5.3",
+  "name": "uiohook-napi-lite",
+  "version": "1.5.4",
   "author": {
-    "name": "Alexander Drozdov"
+    "name": "Neeraj Sharma"
   },
   "repository": {
     "type": "git",
