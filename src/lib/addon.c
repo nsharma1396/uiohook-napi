@@ -191,7 +191,7 @@ napi_value AddonStart(napi_env env, napi_callback_info info) {
   napi_value cb = info_argv[0];
 
   napi_value async_resource_name;
-  status = napi_create_string_utf8(env, "UIOHOOK_NAPI", NAPI_AUTO_LENGTH, &async_resource_name);
+  status = napi_create_string_utf8(env, "UIOHOOK_NAPI_LITE", NAPI_AUTO_LENGTH, &async_resource_name);
   NAPI_THROW_IF_FAILED(env, status, NULL);
 
   status = napi_create_threadsafe_function(env, cb, NULL, async_resource_name, 0, 1, NULL, NULL, NULL, tsfn_to_js_proxy, &threadsafe_fn);
