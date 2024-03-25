@@ -1,3 +1,37 @@
+diff --git a/src/darwin/input_hook.c b/src/darwin/input_hook.c
+index e6cd6ce..e239fd5 100644
+--- a/src/darwin/input_hook.c
++++ b/src/darwin/input_hook.c
+@@ -966,21 +966,21 @@ CGEventRef hook_event_proc(CGEventTapProxy tap_proxy, CGEventType type, CGEventR
+         case kCGEventLeftMouseDragged:
+         case kCGEventRightMouseDragged:
+         case kCGEventOtherMouseDragged:
+-            // FIXME The drag flag is confusing.  Use prev x,y to determine click.
+-            // Set the mouse dragged flag.
+-            mouse_dragged = true;
+-            process_mouse_moved(timestamp, event_ref);
++        //     // FIXME The drag flag is confusing.  Use prev x,y to determine click.
++        //     // Set the mouse dragged flag.
++        //     mouse_dragged = true;
++        //     process_mouse_moved(timestamp, event_ref);
+             break;
+ 
+         case kCGEventMouseMoved:
+-            // Set the mouse dragged flag.
+-            mouse_dragged = false;
+-            process_mouse_moved(timestamp, event_ref);
++        //     // Set the mouse dragged flag.
++        //     mouse_dragged = false;
++        //     process_mouse_moved(timestamp, event_ref);
+             break;
+ 
+ 
+         case kCGEventScrollWheel:
+-            process_mouse_wheel(timestamp, event_ref);
++        //     process_mouse_wheel(timestamp, event_ref);
+             break;
+ 
+         default:
 diff --git a/src/windows/input_helper.c b/src/windows/input_helper.c
 index e690021..4b7cff1 100644
 --- a/src/windows/input_helper.c
