@@ -1,7 +1,7 @@
 {
   'targets': [
     {
-      'target_name': 'uiohook_napi',
+      'target_name': 'uiohook_napi_lite',
       'dependencies': ['libuiohook'],
       'sources': [
         'src/lib/addon.c',
