@@ -1,8 +1,8 @@
 diff --git a/src/darwin/input_hook.c b/src/darwin/input_hook.c
-index e6cd6ce..e239fd5 100644
+index 875deb6..3984ee4 100644
 --- a/src/darwin/input_hook.c
 +++ b/src/darwin/input_hook.c
-@@ -966,21 +966,21 @@ CGEventRef hook_event_proc(CGEventTapProxy tap_proxy, CGEventType type, CGEventR
+@@ -965,21 +965,24 @@ CGEventRef hook_event_proc(CGEventTapProxy tap_proxy, CGEventType type, CGEventR
          case kCGEventLeftMouseDragged:
          case kCGEventRightMouseDragged:
          case kCGEventOtherMouseDragged:
@@ -10,25 +10,28 @@ index e6cd6ce..e239fd5 100644
 -            // Set the mouse dragged flag.
 -            mouse_dragged = true;
 -            process_mouse_moved(timestamp, event_ref);
-+        //     // FIXME The drag flag is confusing.  Use prev x,y to determine click.
-+        //     // Set the mouse dragged flag.
-+        //     mouse_dragged = true;
-+        //     process_mouse_moved(timestamp, event_ref);
++            // ignore mouse drag event
++            // // FIXME The drag flag is confusing.  Use prev x,y to determine click.
++            // // Set the mouse dragged flag.
++            // mouse_dragged = true;
++            // process_mouse_moved(timestamp, event_ref);
              break;
  
          case kCGEventMouseMoved:
 -            // Set the mouse dragged flag.
 -            mouse_dragged = false;
 -            process_mouse_moved(timestamp, event_ref);
-+        //     // Set the mouse dragged flag.
-+        //     mouse_dragged = false;
-+        //     process_mouse_moved(timestamp, event_ref);
++            // ignore mouse move event
++            // // Set the mouse dragged flag.
++            // mouse_dragged = false;
++            // process_mouse_moved(timestamp, event_ref);
              break;
  
  
          case kCGEventScrollWheel:
 -            process_mouse_wheel(timestamp, event_ref);
-+        //     process_mouse_wheel(timestamp, event_ref);
++            // ignore mouse wheel event
++            // process_mouse_wheel(timestamp, event_ref);
              break;
  
          default:
@@ -46,7 +49,7 @@ index e690021..4b7cff1 100644
                      __FUNCTION__, __LINE__, vk_code);
  
 diff --git a/src/windows/input_hook.c b/src/windows/input_hook.c
-index db1e79e..e37db1e 100644
+index b9e9161..f04a57f 100644
 --- a/src/windows/input_hook.c
 +++ b/src/windows/input_hook.c
 @@ -23,10 +23,20 @@
@@ -199,7 +202,7 @@ index db1e79e..e37db1e 100644
      }
  }
  
-@@ -558,11 +574,13 @@ LRESULT CALLBACK mouse_hook_event_proc(int nCode, WPARAM wParam, LPARAM lParam)
+@@ -585,11 +600,13 @@ LRESULT CALLBACK mouse_hook_event_proc(int nCode, WPARAM wParam, LPARAM lParam)
              break;
  
          case WM_MOUSEMOVE:
@@ -215,17 +218,16 @@ index db1e79e..e37db1e 100644
              break;
  
          /* For horizontal scroll wheel support.
-@@ -570,7 +588,8 @@ LRESULT CALLBACK mouse_hook_event_proc(int nCode, WPARAM wParam, LPARAM lParam)
+@@ -597,7 +614,7 @@ LRESULT CALLBACK mouse_hook_event_proc(int nCode, WPARAM wParam, LPARAM lParam)
           * case 0x020E:
           */
          case WM_MOUSEHWHEEL:
 -            process_mouse_wheel(mshook, WHEEL_HORIZONTAL_DIRECTION);
-+            // ignore mouse wheel event
 +            // process_mouse_wheel(mshook, WHEEL_HORIZONTAL_DIRECTION);
              break;
  
          default:
-@@ -594,40 +613,17 @@ LRESULT CALLBACK mouse_hook_event_proc(int nCode, WPARAM wParam, LPARAM lParam)
+@@ -621,40 +638,17 @@ LRESULT CALLBACK mouse_hook_event_proc(int nCode, WPARAM wParam, LPARAM lParam)
  
  // Callback function that handles events.
  void CALLBACK win_hook_event_proc(HWINEVENTHOOK hook, DWORD event, HWND hWnd, LONG idObject, LONG idChild, DWORD dwEventThread, DWORD dwmsEventTime) {
@@ -275,7 +277,7 @@ index db1e79e..e37db1e 100644
      }
  }
  
-@@ -660,17 +656,22 @@ UIOHOOK_API int hook_run() {
+@@ -687,17 +681,22 @@ UIOHOOK_API int hook_run() {
      keyboard_event_hhook = SetWindowsHookEx(WH_KEYBOARD_LL, keyboard_hook_event_proc, hInst, 0);
      mouse_event_hhook = SetWindowsHookEx(WH_MOUSE_LL, mouse_hook_event_proc, hInst, 0);
  
@@ -306,7 +308,7 @@ index db1e79e..e37db1e 100644
              logger(LOG_LEVEL_WARN, "%s [%u]: SetWinEventHook() failed!\n",
                      __FUNCTION__, __LINE__);
          }
-@@ -678,9 +679,6 @@ UIOHOOK_API int hook_run() {
+@@ -705,9 +704,6 @@ UIOHOOK_API int hook_run() {
          logger(LOG_LEVEL_DEBUG, "%s [%u]: SetWindowsHookEx() successful.\n",
                  __FUNCTION__, __LINE__);
  
