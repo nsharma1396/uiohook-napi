@@ -10,6 +10,8 @@ jobs:
         with:
           submodules: true
       - uses: actions/setup-node@v3
+        with:
+          node-version: 18.18.2
       - run: yarn apply-libuiohook-patch
       - run: yarn --frozen-lockfile
       - run: yarn prebuild --arch x64
@@ -26,6 +28,8 @@ jobs:
         with:
           submodules: true
       - uses: actions/setup-node@v3
+        with:
+          node-version: 18.18.2
       - run: |
           sudo apt-get update
           sudo apt-get install -y libxrandr-dev libxtst-dev
@@ -45,6 +49,8 @@ jobs:
         with:
           submodules: true
       - uses: actions/setup-node@v3
+        with:
+          node-version: 18.18.2
       - run: yarn apply-libuiohook-patch
       - run: yarn --frozen-lockfile
       - run: yarn prebuild --arch x64
@@ -77,6 +83,8 @@ jobs:
           name: darwin
           path: prebuilds
       - uses: actions/setup-node@v3
+        with:
+          node-version: 18.18.2
       - run: yarn apply-libuiohook-patch
       - run: yarn --frozen-lockfile --ignore-scripts
       - run: yarn tsc
