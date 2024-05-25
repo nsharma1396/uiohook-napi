@@ -11,7 +11,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.18.2
+          node-version: 16
       - run: yarn apply-libuiohook-patch
       - run: yarn --frozen-lockfile
       - run: yarn prebuild --arch x64
@@ -29,7 +29,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.18.2
+          node-version: 16
       - run: |
           sudo apt-get update
           sudo apt-get install -y libxrandr-dev libxtst-dev
@@ -50,7 +50,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.18.2
+          node-version: 16
       - run: yarn apply-libuiohook-patch
       - run: yarn --frozen-lockfile
       - run: yarn prebuild --arch x64
@@ -84,7 +84,7 @@ jobs:
           path: prebuilds
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.18.2
+          node-version: 16
       - run: yarn apply-libuiohook-patch
       - run: yarn --frozen-lockfile --ignore-scripts
       - run: yarn tsc
